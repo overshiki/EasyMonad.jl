@@ -1,0 +1,4 @@
+name = "EasyMonad"
+uuid = "e4dbf12b-b8cf-4673-b6eb-8b0d4667dd49"
+authors = ["overshiki <le.niu@hotmail.com>"]
+version = "0.1.0"
