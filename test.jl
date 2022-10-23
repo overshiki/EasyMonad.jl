@@ -18,4 +18,33 @@ test() = begin
     end
 end
 
+test_func() = begin 
+    a = 4
+    func = UnaryFunction{Int, Int}(x->x*2) 
+    @show a >> func 
+    @show func << a
+
+    a = nothing
+    func = UnaryFunction{Int, Int}(x->x*2) 
+    @show a >> func 
+    @show func << a
+
+    _func(x) = begin 
+        x > 5 && return nothing 
+        return x+1
+    end
+
+    a = 4
+    func = UnaryFunction{Int, Maybe{Int}}(_func) 
+    @show a >> func 
+    @show func << a
+
+    sa = collect(1:10)
+    sa = map(a->a>>func, sa)
+    @show typeof(sa)
+    @show sa
+
+end
+
 test()
+test_func()
