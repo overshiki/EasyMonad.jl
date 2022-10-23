@@ -1,6 +1,6 @@
 module EasyMonad
 
 include("monad.jl")
-export Maybe, (>>), (<<)
+export Maybe, (>>), (<<), FunctionType, UnaryFunction, BinaryFunction
 
 end # module EasyMonad

@@ -15,3 +15,30 @@ note that the symbol >> in haskell has a different meaning. Actually, this funct
 end
 
 (<<)(f::Function, x::Maybe{T}) where T = x >> f
+
+
+abstract type FunctionType end
+
+struct UnaryFunction{T1, T2} <: FunctionType
+    func::Function
+end
+
+struct BinaryFunction{T1, T2, T3} <: FunctionType
+    func::Function
+end
+
+((>>)(t::Tuple{T1, T2}, f::BinaryFunction{T1, T2, T3})::T3) where {T1, T2, T3} = begin 
+    return f.func(nt...)
+end
+
+((>>)(t::T1, f::UnaryFunction{T1, T2})::T2) where {T1, T2} = begin 
+    return f.func(t)
+end
+
+((>>)(x::Maybe{T}, f::UnaryFunction{T, T1})::Maybe{T1}) where {T, T1} = begin 
+    return x >> f.func
+end
+
+((<<)(f::UnaryFunction{T, T1}, x::Maybe{T})::Maybe{T1}) where {T, T1} = begin 
+    return f.func << x
+end
