@@ -44,6 +44,12 @@ test_func() = begin
     @show typeof(sa)
     @show sa
 
+    x = 1 
+    y = 2 
+    func = BinaryFunction{Int, Int, Int}((+))
+    @show (x,y) >> func 
+    @show func << (x,y)
+
 end
 
 test()

@@ -28,13 +28,24 @@ struct BinaryFunction{T1, T2, T3} <: FunctionType
 end
 
 ((>>)(t::Tuple{T1, T2}, f::BinaryFunction{T1, T2, T3})::T3) where {T1, T2, T3} = begin 
-    return f.func(nt...)
+    return f.func(t...)
+end
+
+((<<)(f::BinaryFunction{T1, T2, T3}, t::Tuple{T1, T2})::T3) where {T1, T2, T3} = begin 
+    return f.func(t...)
 end
 
 ((>>)(t::T1, f::UnaryFunction{T1, T2})::T2) where {T1, T2} = begin 
     return f.func(t)
 end
 
+((<<)(f::UnaryFunction{T1, T2}, t::T1)::T2) where {T1, T2} = begin 
+    return f.func(t)
+end
+
+"""
+currently only UnaryFunction support Maybe type
+"""
 ((>>)(x::Maybe{T}, f::UnaryFunction{T, T1})::Maybe{T1}) where {T, T1} = begin 
     return x >> f.func
 end
