@@ -17,6 +17,8 @@ end
 (<<)(f::Function, x::Maybe{T}) where T = x >> f
 
 
+###### FunctionType #####
+
 abstract type FunctionType end
 
 struct UnaryFunction{T1, T2} <: FunctionType
@@ -52,4 +54,12 @@ end
 
 ((<<)(f::UnaryFunction{T, T1}, x::Maybe{T})::Maybe{T1}) where {T, T1} = begin 
     return f.func << x
+end
+
+
+###### FunctionType end #####
+
+(maybe_pass(predicat::UnaryFunction{T, Bool}, x::T)::Maybe{T}) where T = begin 
+    x >> predicat && return x 
+    return nothing
 end

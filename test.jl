@@ -52,5 +52,15 @@ test_func() = begin
 
 end
 
+using PartialFunctions
+test_maybepass() = begin 
+    a = collect(1:10)
+    pred = UnaryFunction{Int, Bool}(x->x>5)
+    vs = map(maybe_pass $ pred, a)
+    @show vs
+end
+
+
 test()
 test_func()
+test_maybepass()
