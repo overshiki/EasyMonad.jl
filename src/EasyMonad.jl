@@ -1,6 +1,7 @@
 module EasyMonad
 
 include("monad.jl")
-export Maybe, (>>), (<<), FunctionType, UnaryFunction, BinaryFunction
+include("macro.jl")
+export Maybe, (>>), (<<), FunctionType, UnaryFunction, BinaryFunction, @VectorMaybe
 
 end # module EasyMonad
