@@ -14,7 +14,7 @@ end
 macro VectorMaybe(t, ex)
     return postwalk(ex) do x 
         return VectorMaybe_func(t, x)
-    end
+    end |> esc
 end
 
 
