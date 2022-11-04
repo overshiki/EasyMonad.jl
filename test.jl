@@ -1,4 +1,5 @@
 include("src/monad.jl")
+include("src/macro.jl")
 
 test() = begin 
     a = 4
@@ -63,4 +64,8 @@ end
 
 test()
 test_func()
+
+@VectorMaybe Int append!([1,2,3], [nothing, ]) 
+
 test_maybepass()
+
